@@ -1,0 +1,50 @@
+package transactionapimapper
+
+import (
+	pbtransaction "github.com/MamangRust/monolith-ecommerce-pb/transaction"
+	"github.com/MamangRust/monolith-ecommerce-shared/domain/response"
+)
+
+type TransactionBaseResponseMapper interface {
+	ToResponseTransaction(transaction *pbtransaction.TransactionResponse) *response.TransactionResponse
+	ToResponsesTransaction(transactions []*pbtransaction.TransactionResponse) []*response.TransactionResponse
+	ToApiResponseTransaction(pbResponse *pbtransaction.ApiResponseTransaction) *response.ApiResponseTransaction
+	ToApiResponsePaginationTransactionDeleteAt(pbResponse *pbtransaction.ApiResponsePaginationTransactionDeleteAt) *response.ApiResponsePaginationTransactionDeleteAt
+}
+
+type TransactionQueryResponseMapper interface {
+	TransactionBaseResponseMapper
+	ToApiResponsesTransaction(pbResponse *pbtransaction.ApiResponsesTransaction) *response.ApiResponsesTransaction
+	ToApiResponsePaginationTransaction(pbResponse *pbtransaction.ApiResponsePaginationTransaction) *response.ApiResponsePaginationTransaction
+}
+
+type TransactionCommandResponseMapper interface {
+	TransactionBaseResponseMapper
+	ToResponseTransactionDeleteAt(transaction *pbtransaction.TransactionResponseDeleteAt) *response.TransactionResponseDeleteAt
+	ToResponsesTransactionDeleteAt(transactions []*pbtransaction.TransactionResponseDeleteAt) []*response.TransactionResponseDeleteAt
+	ToApiResponseTransactionDeleteAt(pbResponse *pbtransaction.ApiResponseTransactionDeleteAt) *response.ApiResponseTransactionDeleteAt
+	ToApiResponseTransactionDelete(pbResponse *pbtransaction.ApiResponseTransactionDelete) *response.ApiResponseTransactionDelete
+	ToApiResponseTransactionAll(pbResponse *pbtransaction.ApiResponseTransactionAll) *response.ApiResponseTransactionAll
+}
+
+type TransactionStatsResponseMapper interface {
+	ToTransactionMonthAmountSuccess(row *pbtransaction.TransactionMonthlyAmountSuccess) *response.TransactionMonthlyAmountSuccessResponse
+	ToTransactionMonthlyAmountSuccess(rows []*pbtransaction.TransactionMonthlyAmountSuccess) []*response.TransactionMonthlyAmountSuccessResponse
+	ToTransactionYearAmountSuccess(row *pbtransaction.TransactionYearlyAmountSuccess) *response.TransactionYearlyAmountSuccessResponse
+	ToTransactionYearlyAmountSuccess(rows []*pbtransaction.TransactionYearlyAmountSuccess) []*response.TransactionYearlyAmountSuccessResponse
+	ToTransactionMonthAmountFailed(row *pbtransaction.TransactionMonthlyAmountFailed) *response.TransactionMonthlyAmountFailedResponse
+	ToTransactionMonthlyAmountFailed(rows []*pbtransaction.TransactionMonthlyAmountFailed) []*response.TransactionMonthlyAmountFailedResponse
+	ToTransactionYearAmountFailed(row *pbtransaction.TransactionYearlyAmountFailed) *response.TransactionYearlyAmountFailedResponse
+	ToTransactionYearlyAmountFailed(rows []*pbtransaction.TransactionYearlyAmountFailed) []*response.TransactionYearlyAmountFailedResponse
+	ToTransactionMonthMethod(row *pbtransaction.TransactionMonthlyMethod) *response.TransactionMonthlyMethodResponse
+	ToTransactionMonthlyMethod(rows []*pbtransaction.TransactionMonthlyMethod) []*response.TransactionMonthlyMethodResponse
+	ToTransactionYearMethod(row *pbtransaction.TransactionYearlyMethod) *response.TransactionYearlyMethodResponse
+	ToTransactionYearlyMethod(rows []*pbtransaction.TransactionYearlyMethod) []*response.TransactionYearlyMethodResponse
+
+	ToApiResponseTransactionMonthAmountSuccess(pbResponse *pbtransaction.ApiResponseTransactionMonthAmountSuccess) *response.ApiResponsesTransactionMonthSuccess
+	ToApiResponseTransactionMonthAmountFailed(pbResponse *pbtransaction.ApiResponseTransactionMonthAmountFailed) *response.ApiResponsesTransactionMonthFailed
+	ToApiResponseTransactionYearAmountSuccess(pbResponse *pbtransaction.ApiResponseTransactionYearAmountSuccess) *response.ApiResponsesTransactionYearSuccess
+	ToApiResponseTransactionYearAmountFailed(pbResponse *pbtransaction.ApiResponseTransactionYearAmountFailed) *response.ApiResponsesTransactionYearFailed
+	ToApiResponseTransactionMonthMethod(pbResponse *pbtransaction.ApiResponseTransactionMonthPaymentMethod) *response.ApiResponsesTransactionMonthMethod
+	ToApiResponseTransactionYearMethod(pbResponse *pbtransaction.ApiResponseTransactionYearPaymentmethod) *response.ApiResponsesTransactionYearMethod
+}
